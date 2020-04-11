@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:plant_ui/views/my_colors.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -26,56 +28,118 @@ class _MyHomePageState extends State<MyHomePage> {
     ScreenUtil _screenUtil = ScreenUtil();
 
     return Scaffold(
-        body: SafeArea(
-      child: ListView(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Stack(
-                  children: <Widget>[
-                    Container(
-                      height: _screenUtil.setHeight(45),
-                      width: _screenUtil.setWidth(45),
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage('assets/avatar1.jpg'),
-                              fit: BoxFit.cover),
-                          shape: BoxShape.circle,
-                          // borderRadius: BorderRadius.circular(60),
-                          border:
-                              Border.all(width: 1, color: Colors.grey[300])),
-                    ),
-                    Positioned(
-                      right: _screenUtil.setWidth(0),
-                      top: _screenUtil.setHeight(6),
-                      child: Container(
-                        height: 10,
-                        width: 10,
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(_screenUtil.setWidth(10),
+              _screenUtil.setHeight(10), _screenUtil.setWidth(10), 0),
+          child: ListView(
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Stack(
+                    children: <Widget>[
+                      Container(
+                        height: _screenUtil.setHeight(45),
+                        width: _screenUtil.setWidth(45),
                         decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.green[900],
+                            image: DecorationImage(
+                                image: AssetImage('assets/avatar1.jpg'),
+                                fit: BoxFit.cover),
+                            shape: BoxShape.circle,
+                            // borderRadius: BorderRadius.circular(60),
+                            border:
+                                Border.all(width: 1, color: Colors.grey[300])),
+                      ),
+                      Positioned(
+                        right: _screenUtil.setWidth(0),
+                        top: _screenUtil.setHeight(6),
+                        child: Container(
+                          height: 10,
+                          width: 10,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: PlantColors.green,
+                          ),
                         ),
                       ),
+                    ],
+                  ),
+                  CustomPaint(
+                    painter: MenuPainter(),
+                    child: Container(
+                      height: _screenUtil.setHeight(35),
+                      width: _screenUtil.setWidth(35),
                     ),
-                  ],
-                ),
-                CustomPaint(
-                  painter: MenuPainter(),
-                  child: Container(
-                    height: _screenUtil.setHeight(35),
-                    width: _screenUtil.setWidth(35),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: _screenUtil.setHeight(20),
+              ),
+              Material(
+                borderRadius: BorderRadius.all(Radius.circular(30)),
+                type: MaterialType.card,
+                elevation: 8,
+                shadowColor: Colors.grey[400],
+                child: TextField(
+                  decoration: InputDecoration(
+                    hintText: 'Search Plant',
+                    hintStyle: GoogleFonts.lato(
+                      textStyle: TextStyle(
+                        color: Colors.grey[400],
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide:
+                          const BorderSide(color: Colors.white, width: 1.0),
+                      borderRadius: BorderRadius.all(Radius.circular(30)),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide:
+                          const BorderSide(width: 1.0, color: Colors.white),
+                      borderRadius: BorderRadius.all(Radius.circular(30)),
+                    ),
+                    filled: true,
+                    fillColor: Colors.white,
+                    prefixIcon: Icon(
+                      Icons.search,
+                      color: PlantColors.green,
+                    ),
                   ),
                 ),
-              ],
-            ),
-            
+              ),
+              SizedBox(
+                height: _screenUtil.setHeight(20),
+              ),
+              Container(
+                height: 300,
+                width: 50,
+                padding: EdgeInsets.only(left: 70, right: 70),
+                child: Card(
+                  elevation: 3,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(32),
+                    ),
+                  ),
+                  // margin: EdgeInsets.only(left: 12, right: 12),
+                  child: Column(
+                    children: <Widget>[
+                      Image.asset(
+                        'assets/plant1.png',
+                        scale: 3,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
-    ));
+    );
   }
 }
 
@@ -85,7 +149,7 @@ class MenuPainter extends CustomPainter {
     var paint = Paint();
 
     //paint properties
-    paint.color = Colors.green[900];
+    paint.color = PlantColors.green;
     paint.strokeCap = StrokeCap.round;
     paint.style = PaintingStyle.stroke;
     paint.strokeWidth = 4.0;
