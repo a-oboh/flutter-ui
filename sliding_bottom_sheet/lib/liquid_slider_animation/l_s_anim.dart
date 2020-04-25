@@ -9,9 +9,36 @@ class _ElasticSidebarState extends State<ElasticSidebar> {
   // offsset for finger position - initial is 0, 0
   Offset _offset = Offset(0, 0);
 
+  // Global key to get container position
+  GlobalKey key = GlobalKey();
+
+  List<double> limits = [];
+
+  @override
+  void initState() {
+    // WidgetsBinding.instance.addPostFrameCallback(callback);
+    super.initState();
+  }
+
+  itemPositions(duration) {
+    RenderBox renderBox = key.currentContext.findRenderObject();
+    final position = renderBox.localToGlobal(Offset.zero);
+    double start = position.dy - 20;
+    double conLimit = position.dy + renderBox.size.height - 20;
+    double step = (conLimit - start) / 5;
+    limits = [];
+    for (var x = start; x < conLimit; x = x + step) {
+      limits.add(x);
+    }
+    setState(() {
+      limits = limits;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
+    double menuItemHeight = screenSize.height * .5;
 
     //width of side bar
     double sidebarSize = screenSize.width * 0.65;
@@ -69,7 +96,55 @@ class _ElasticSidebarState extends State<ElasticSidebar> {
                       ),
                     ),
                     Container(
-                      
+                      key: key,
+                      height: screenSize.height * .25,
+                      child: Center(
+                        child: Column(
+                          children: <Widget>[
+                            Text(
+                              'App Info',
+                              style: TextStyle(color: Colors.black),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Container(
+                      width: double.infinity,
+                      height: menuItemHeight,
+                      child: Column(
+                        children: <Widget>[
+                          Text(
+                            'More Info',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 20,
+                            ),
+                          ),
+                          Text(
+                            'Guyyy',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 20,
+                            ),
+                          ),
+                          Text(
+                            'I don tire',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 20,
+                            ),
+                          ),
+                          Text(
+                            'I go blow! 🚀',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 20,
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ],
                 ),
