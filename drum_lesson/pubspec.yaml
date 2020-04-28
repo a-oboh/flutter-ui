@@ -1,4 +1,4 @@
-name: drinks_app_ui
+name: drum_lesson
 description: A new Flutter project.
 
 # The following defines the version and build number for your application.
@@ -23,6 +23,7 @@ dependencies:
   flutter_screenutil: ^1.0.2
   google_fonts: ^0.3.10
   line_awesome_icons: ^1.0.4+2
+  flutter_statusbarcolor: ^0.2.3
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
