@@ -20,25 +20,105 @@ class _HomeViewState extends State<HomeView> {
             Padding(
               padding: EdgeInsets.only(
                   left: screenUtil.setWidth(14),
-                  right: screenUtil.setWidth(150)),
+                  right: screenUtil.setWidth(200)),
               child: Text(
                 'The ReFex Choice',
                 style: Theme.of(context).textTheme.headline,
               ),
             ),
-            mainCard(),
-            // Positioned(
-            //   top: screenUtil.setHeight(-13),
-            //   bottom: screenUtil.setHeight(-5),
-            //   right: -40,
-            //   child: Container(
-            //     child: Image.asset(
-            //       'assets/wine_bottle_2.png',
-            //       height: screenUtil.setHeight(230),
-            //       width: screenUtil.setWidth(200),
-            //     ),
-            //   ),
-            // ),
+            Stack(
+              children: <Widget>[
+                mainCard(),
+                Positioned(
+                  top: screenUtil.setHeight(-13),
+                  bottom: screenUtil.setHeight(-5),
+                  right: -40,
+                  child: Container(
+                    child: Image.asset(
+                      'assets/wine_bottle_2.png',
+                      height: screenUtil.setHeight(230),
+                      width: screenUtil.setWidth(200),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  top: 50,
+                  left: 30,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        'ROTARI BRUT',
+                        style: Theme.of(context).textTheme.headline.copyWith(
+                              color: Colors.white,
+                              fontSize: 20,
+                            ),
+                      ),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      Text(
+                        'Wine type: Rose brut',
+                        style: Theme.of(context).textTheme.display3.copyWith(
+                              color: Colors.white,
+                              fontSize: 15,
+                              // fontWeight: FontWeight.,
+                            ),
+                      ),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      Text(
+                        'Quantity: 1.5 L',
+                        style: Theme.of(context).textTheme.display3.copyWith(
+                              color: Colors.white,
+                              fontSize: 15,
+                              // fontWeight: FontWeight.,
+                            ),
+                      ),
+                    ],
+                  ),
+                ),
+                Positioned(
+                  bottom: 20,
+                  left: 30,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 0),
+                    child: Container(
+                      height: 45,
+                      width: 100,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(35)),
+                      child: Center(
+                        child: Text(
+                          '\$ 11.97',
+                          style: Theme.of(context).textTheme.headline.copyWith(
+                                color: Colors.black,
+                                fontSize: 15,
+                                // fontWeight: FontWeight.,
+                              ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 14, vertical: 20),
+              child: Row(
+                children: <Widget>[
+                  Text(
+                    'Last Orders',
+                    style: Theme.of(context).textTheme.headline.copyWith(
+                          color: Colors.black,
+                          // fontSize: 15,
+                        ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
@@ -48,32 +128,28 @@ class _HomeViewState extends State<HomeView> {
   Widget mainCard() {
     return Padding(
       padding: EdgeInsets.only(
-          left: screenUtil.setWidth(14),
-          right: screenUtil.setWidth(14),
-          top: screenUtil.setHeight(25)),
+        left: screenUtil.setWidth(14),
+        right: screenUtil.setWidth(14),
+        top: screenUtil.setHeight(25),
+      ),
       child: Container(
         // height: 200,
         child: Stack(
           children: <Widget>[
             Container(
-              height: screenUtil.setHeight(170),
+              height: screenUtil.setHeight(190),
               decoration: BoxDecoration(
                 color: Color(0xffb97aa0),
                 borderRadius: BorderRadius.circular(11),
                 boxShadow: <BoxShadow>[
                   BoxShadow(
-                    offset: Offset(3, 3),
-                    blurRadius: 20,
-                    spreadRadius: 0.5,
+                    // offset: Offset(3, 3),
+                    blurRadius: 12,
+                    spreadRadius: 0.2,
                     color: Color(0xffb46b98),
                   ),
                 ],
               ),
-            ),
-            CustomPaint(
-              size: Size(screenUtil.setWidth(double.infinity),
-                  screenUtil.setHeight(170)),
-              painter: FirstCircle(),
             ),
           ],
         ),
@@ -165,68 +241,10 @@ class FirstCircle extends CustomPainter {
     path2.lineTo(width, 0);
 
     canvas.drawPath(path2, paint);
-
-    // Offset center = Offset(size.width - 5, size.height * 0.2);
-
-    // Offset center2 = Offset(size.width * 0.14, size.height - 10);
-
-    // canvas.drawCircle(center, 75, paint);
-
-    // canvas.drawCircle(center2, 20, paint);
   }
 
   @override
   bool shouldRepaint(CustomPainter oldDelegate) {
-    return true;
-  }
-}
-
-class SecondCircle extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    Paint paint = Paint()..color = Color(0xffb46b98);
-
-    Offset center = Offset(size.width, size.height);
-
-    canvas.drawCircle(center, 20, paint);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return true;
-  }
-}
-
-class MainClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    double width = size.width;
-    double height = size.height;
-
-    Path path = Path();
-    path.lineTo(0, height - 14);
-
-    path.quadraticBezierTo(-4, 188, 150, height);
-
-    path.lineTo(width - 12, height);
-
-    path.quadraticBezierTo(width, 170, width, height - 20);
-
-    path.lineTo(width - 5, 10);
-
-    path.quadraticBezierTo(width, -20, -width, 30);
-
-    // path.lineTo(10, 10);
-
-    // path.quadraticBezierTo(0, 0, 0, 0);
-
-    path.close();
-
-    return path;
-  }
-
-  @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) {
     return true;
   }
 }

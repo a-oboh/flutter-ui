@@ -21,6 +21,10 @@ class MyApp extends StatelessWidget {
             fontSize: 25,
             fontWeight: FontWeight.bold,
           ),
+          body1: GoogleFonts.poppins(
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
       home: MainView(),
